@@ -1,0 +1,73 @@
+.nominations-list {
+  display: none;
+  width: 25%;
+  padding: 40px 10px 0 0;
+  position: fixed;
+  right: 10px;
+  color: white;
+}
+.nominations-list img {
+  height: 78px;
+  max-width: 53px;
+  margin-top: auto;
+  border-radius: 7px;
+}
+.nominations-list .button p {
+  display: inline;
+}
+.nominations-list .empty-box {
+  height: 150px;
+  max-width: 100%;
+  color: antiquewhite;
+}
+.nominations-list .details {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+}
+.nominations-list .nomination {
+  display: flex;
+}
+.nominations-list button {
+  display: inline-flex;
+  height: fit-content;
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: transparent;
+  color: rgb(15, 146, 11);
+  font-size: 1rem;
+  text-align: center;
+  border-style: solid;
+  border-color: rgb(15, 146, 11);
+  border-image: none;
+  border-radius: 5px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nominations-list button p {
+  margin: 0;
+}
+
+@media screen and (min-width: 375px) {
+
+}
+
+@media screen and (min-width: 576px) {
+
+}
+
+@media screen and (min-width: 768px) {
+  .nominations-list {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+}
+
+@media screen and (min-width: 1200px) {
+}
+
+@media screen and (min-width: 1600px) {
+}

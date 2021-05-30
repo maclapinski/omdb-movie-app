@@ -1,0 +1,33 @@
+.nomination {
+  display: flex;
+  margin: 12px 0 0 0;
+}
+.nomination p {
+  margin: 0 0 5px 0;
+}
+.nomination .details {
+  /* height: 108px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  margin-left: 10px;
+}
+.nomination .details button {
+  width: 90px;
+  padding: 4px;
+  border-style: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  background-color: rgb(228, 29, 29);
+}
+.nomination button:hover {
+  background-color:rgb(216, 4, 4);
+}
+.nomination .details .title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

@@ -1,0 +1,19 @@
+.page-change-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.page-change-buttons button{
+    width: 75px;
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    border-radius: 6px;
+    border-style: none;
+    font-size: 1rem;
+    margin: 0 10px;
+}
+.page-change-buttons svg {
+ font-size: xx-large;
+}

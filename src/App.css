@@ -1,0 +1,71 @@
+.wrapper {
+  margin: auto;
+  max-width: 1400px;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px 20px;
+}
+.container p {
+font-size: medium;
+}
+.container .title {
+  display: flex;
+  align-items: center;
+}
+.container .title h1 {
+  margin: 30px 17px;
+}
+.container .title img {
+  height: 70px;
+}
+.inner-container {
+  display: flex;
+}
+
+p {
+  margin: 5px 0;
+}
+
+@media screen and (min-width: 375px) {
+}
+
+/* surface pro screen size */
+@media screen and (min-width: 540px) {
+}
+
+@media screen and (min-width: 576px) {
+
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 73%;
+    padding: 30px 40px;
+  }
+  .container .title {
+    align-items: baseline;
+  }
+
+  .container .title img {
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 1200px) {
+}
+
+@media screen and (min-width: 1600px) {
+}
