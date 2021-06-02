@@ -18,7 +18,7 @@ const App = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [lastPageNumber, setLastPageNumber] = useState(1);
   const [nominationsNumber, setNominationsNumber] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
 
@@ -29,7 +29,7 @@ const App = () => {
   const onTermSubmitHandler = async (number) => {
     const apiKey = "d4e0320";
     const response = await omdb.get("", {
-      params: { s: searchTerm, page: setPage(number), apikey: apiKey },
+      params: { s: searchTerm.trim(), page: setPage(number), apikey: apiKey },
     });
 
     if (response.data.Response === "True") {
@@ -57,10 +57,7 @@ const App = () => {
 
   const onNominationHandler = (nominatedMovie) => {
     if (nominationsNumber === 5) {
-      handleAlertOpen(
-        "You can't nominate more than 5 movies!",
-        "error"
-      );
+      handleAlertOpen("You can't nominate more than 5 movies!", "error");
     } else {
       setIsNominatedProperty(nominatedMovie.imdbID, false);
       setNominationsNumber(nominationsNumber + 1);
@@ -165,14 +162,14 @@ const App = () => {
   const handleAlertOpen = (message, type) => {
     setAlertMessage(message);
     setAlertType(type);
-    setOpen(true);
+    setOpenAlert(true);
   };
 
   const handleAlertClose = (reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setOpenAlert(false);
   };
 
   return (
@@ -225,7 +222,7 @@ const App = () => {
           onDelete={onNominationDeleteHandler}
         />
         <SnackBar
-          alertState={open}
+          alertState={openAlert}
           close={handleAlertClose}
           message={alertMessage}
           type={alertType}

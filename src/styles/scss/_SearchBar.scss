@@ -3,9 +3,9 @@
   display: flex;
   width: 100%;
   height: 40px;
-  padding: 0 13px;
+
   margin: 20px 0;
-  background-color: white;
+  // background-color: white;
   color: black;
   flex-direction: column;
   border-radius: 15px;
@@ -14,6 +14,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    .search-input {
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border-radius: 15px;
+
+      width: 100%;
+    }
+    .search-submit {
+      display: none;
+      border-radius: 15px;
+      height: 32px;
+      padding: 0 18px;
+      border: 3px solid white;
+      font-size: inherit;
+      font-family: "Nunito Sans", sans-serif;
+      font-weight: 600;
+      &:hover {
+        border: 3px solid #eebc16;
+      }
+    }
     input {
       width: 100%;
       height: 32px;
@@ -23,7 +45,7 @@
       border-style: none;
       &:focus-visible {
         outline: auto;
-        outline-color: #343434;;
+        outline-color: #343434;
       }
     }
     &:focus-visible {
@@ -36,22 +58,29 @@
   }
 }
 
-@media screen and (min-width: 375px) {
-}
-
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 568px) and (max-height: 550px) {
   .search-bar {
-    width: 400px;
+    width: 55%;
   }
 }
 
-@media screen and (min-width: 768px) {
-}
-
 @media screen and (min-width: 1024px) {
+  .search-bar {
+    width: 55%;
+  }
 }
 
 @media screen and (min-width: 1200px) {
+  .search-bar {
+    form {
+      .search-input {
+        margin-right: 10px;
+      }
+      .search-submit {
+        display: block;
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 1600px) {

@@ -27,13 +27,19 @@ const SearchBar = (props) => {
   return (
     <div className="search-bar">
       <form action="." onSubmit={onSearchSubmit}>
-        <SearchIcon />
-        <input
-          type="search"
-          value={term}
-          placeholder="Search..."
-          onChange={onInputChange}
-        ></input>
+        <div className="search-input">
+          <SearchIcon />
+          <input
+            type="search"
+            value={term}
+            placeholder="Search..."
+            onChange={onInputChange}
+          ></input>
+        </div>
+
+        <button className="search-submit" type="submit">
+          Search
+        </button>
       </form>
     </div>
   );

@@ -46,14 +46,14 @@
     margin-top: auto;
     border-radius: 7px;
   }
-  .no-nominations{
-    p{
+  .no-nominations {
+    p {
       margin: 15px;
     }
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 576px) and (min-height: 576px) {
   .navbar {
     display: none;
   }
