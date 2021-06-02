@@ -286,9 +286,9 @@ p {
   border-style: none;
 }
 
-.search-bar form input:focus:not(:focus-visible) {
-  background: lime;
-  /* undo gold */
+.search-bar form input:focus-visible {
+  outline: auto;
+  outline-color: #343434;
 }
 
 .search-bar form:focus-visible {

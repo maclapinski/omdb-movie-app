@@ -21,11 +21,9 @@
       font-size: large;
       border-radius: 4px;
       border-style: none;
-      // &:focus-visible {
-      //   outline: auto;
-      // }
-      &:focus:not(:focus-visible) {
-        background: lime; /* undo gold */
+      &:focus-visible {
+        outline: auto;
+        outline-color: #343434;;
       }
     }
     &:focus-visible {

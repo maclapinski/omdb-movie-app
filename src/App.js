@@ -58,7 +58,7 @@ const App = () => {
   const onNominationHandler = (nominatedMovie) => {
     if (nominationsNumber === 5) {
       handleAlertOpen(
-        "You already reached maximum number of nominations!",
+        "You can't nominate more than 5 movies!",
         "error"
       );
     } else {
