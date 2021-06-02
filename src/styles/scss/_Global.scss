@@ -1,6 +1,6 @@
 .wrapper {
-  margin: auto;
   max-width: 1400px;
+  margin: auto;
 }
 .body {
   display: flex;
@@ -8,11 +8,11 @@
 }
 
 .container {
-  color: white;
   display: flex;
-  flex-direction: column;
   width: 100%;
-  padding: 40px 20px;
+  padding: 20px;
+  color: white;
+  flex-direction: column;
   p {
     font-size: medium;
   }
@@ -29,6 +29,13 @@
       display: flex;
     }
   }
+  .search-intro{
+    margin-top: 30px;
+    text-align: center;
+    .lottie{
+      margin-bottom: 20px;
+    }
+  }
 }
 
 p {
@@ -39,6 +46,7 @@ p {
   .container {
     width: 73%;
     padding: 30px 40px;
+
     .title {
       align-items: baseline;
       img {

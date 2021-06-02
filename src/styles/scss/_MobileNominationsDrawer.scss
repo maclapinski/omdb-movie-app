@@ -1,20 +1,33 @@
 /*Mobile Nominations Drawer styling ***************************************** */
 .navbar {
-  background-color: white;
-  z-index: 1;
   position: fixed;
+  z-index: 1;
+  display: flex;
   width: 100%;
   height: 60px;
+  background-color: white;
   background-color: transparent;
-  display: flex;
   flex-direction: row-reverse;
   .MuiButton-root {
-    color: rgb(0, 0, 0);
     padding: 6px 23px;
+    color: rgb(0, 0, 0);
   }
   .MuiButtonBase-root {
     display: inline-flex;
     align-items: flex-end;
+  }
+  .MuiBadge-anchorOriginTopRightRectangle {
+    transform: scale(1) translate(25%, -25%);
+  }
+  .MuiBadge-badge {
+    font-size: 1rem;
+  }
+  .MuiSvgIcon-root {
+    width: 1.2em;
+    height: 1.2em;
+    padding: 5px;
+    background-color: white;
+    border-radius: 50px;
   }
 }
 
@@ -28,10 +41,15 @@
     color: black;
   }
   img {
-    height: 78px;
     max-width: 53px;
+    height: 78px;
     margin-top: auto;
     border-radius: 7px;
+  }
+  .no-nominations{
+    p{
+      margin: 15px;
+    }
   }
 }
 

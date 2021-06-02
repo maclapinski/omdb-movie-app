@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import SimpleMenu from "./Components/MobileNominationsMenu";
 import MobileNominationsDrawer from "./Components/MobileNominationsDrawer";
 import SearchBar from "./Components/SearchBar";
 import omdb from "./api/omdb";
+import LottieAnimation from "../src/Components/Lottie";
 import MovieList from "./Components/MovieList";
 import PageButtons from "./Components/PageButtons";
 import NominationsList from "./Components/NominationsList";
 import movieClapper from "../src/media/movie-clapper-open.svg";
 import "./styles/css/style.css";
+import cinema from "./media/45737-cinema-infos-and-ressources.json";
+import SnackBar from "./Components/Snackbar";
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
@@ -16,6 +18,9 @@ const App = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [lastPageNumber, setLastPageNumber] = useState(1);
   const [nominationsNumber, setNominationsNumber] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
 
   const onTermChangeHandler = (term) => {
     setSearchTerm(term);
@@ -27,17 +32,22 @@ const App = () => {
       params: { s: searchTerm, page: setPage(number), apikey: apiKey },
     });
 
-    if (!number) {
-      setPageCount(response.data.totalResults);
-    }
-    const searchData = duplicateCheck(response.data.Search);
-    if (nominationsList.length === 0) {
-      searchData.map((movie) => {
-        movie.isNominated = false;
-      });
-      setMovieList(searchData);
+    if (response.data.Response === "True") {
+      if (!number) {
+        setPageCount(response.data.totalResults);
+      }
+      const searchData = duplicateCheck(response.data.Search);
+      if (nominationsList.length === 0) {
+        searchData.forEach((movie) => {
+          movie.isNominated = false;
+        });
+        setMovieList(searchData);
+      } else {
+        nominationsCheck(searchData);
+      }
     } else {
-      nominationsCheck(searchData);
+      handleAlertOpen("No movies found. Check your search term.", "error");
+      setMovieList([]);
     }
   };
   const onPageNumberChangeHandler = (number) => {
@@ -46,18 +56,28 @@ const App = () => {
   };
 
   const onNominationHandler = (nominatedMovie) => {
-    setIsNominatedProperty(nominatedMovie.imdbID, false);
-    setNominationsNumber(nominationsNumber + 1);
-    // const searchResults = [...movieList];
-    // searchResults.map((movie) => {
-    //   if (nominatedMovie.imdbID === movie.imdbID) {
-    //     movie.isNominated = true;
-    //   }
-    // });
-    // setMovieList([...searchResults]);
-    setNominationsList((prevNominations) => {
-      return [...prevNominations, nominatedMovie];
-    });
+    if (nominationsNumber === 5) {
+      handleAlertOpen(
+        "You already reached maximum number of nominations!",
+        "error"
+      );
+    } else {
+      setIsNominatedProperty(nominatedMovie.imdbID, false);
+      setNominationsNumber(nominationsNumber + 1);
+      if (nominationsNumber === 4) {
+        console.log(nominationsNumber);
+        handleAlertOpen(
+          "You successfully nominated the fifth movie and used all your nominations!",
+          "success"
+        );
+      } else {
+        handleAlertOpen("Movie successfully nominated!", "success");
+      }
+
+      setNominationsList((prevNominations) => {
+        return [...prevNominations, nominatedMovie];
+      });
+    }
   };
 
   //find move deleted from nominations list, update nominations list,
@@ -71,18 +91,20 @@ const App = () => {
     };
     const updatedNominations = nominations.filter(checkDeleted);
     setNominationsList(updatedNominations);
+    handleAlertOpen("Nomination successfully removed!", "success");
     setIsNominatedProperty(imdbID, true);
   };
 
   const setIsNominatedProperty = (imdbID, isDeleteAction) => {
     const searchResults = [...movieList];
-    searchResults.map((movie) => {
+    searchResults.forEach((movie) => {
       if (imdbID === movie.imdbID && isDeleteAction) {
         movie.isNominated = false;
       } else if (imdbID === movie.imdbID && !isDeleteAction) {
         movie.isNominated = true;
       }
     });
+
     setMovieList([...searchResults]);
   };
 
@@ -130,14 +152,27 @@ const App = () => {
 
   const nominationsCheck = (results) => {
     const newResults = [...results];
-    newResults.map((newResult) => {
-      nominationsList.map((nomination) => {
+    newResults.forEach((newResult) => {
+      nominationsList.forEach((nomination) => {
         if (newResult.imdbID === nomination.imdbID) {
           newResult.isNominated = true;
         }
       });
     });
     setMovieList(newResults);
+  };
+
+  const handleAlertOpen = (message, type) => {
+    setAlertMessage(message);
+    setAlertType(type);
+    setOpen(true);
+  };
+
+  const handleAlertClose = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   return (
@@ -159,8 +194,17 @@ const App = () => {
             onChange={onTermChangeHandler}
           />
           {movieList.length === 0 ? (
-            <div>
-              <p>Search for movies you want to nominate.</p>
+            <div className="search-intro">
+              <LottieAnimation lotti={cinema} height={200} width={200} />
+              <p>
+                Use the search bar above to find movies you want to nominate.
+                You can choose five.
+              </p>
+              <p>
+                If you change your mind you can remove movies from the
+                nomination list at any time.
+              </p>
+              <p>Enjoy!</p>
             </div>
           ) : (
             <div>
@@ -179,6 +223,12 @@ const App = () => {
         <NominationsList
           nominations={nominationsList}
           onDelete={onNominationDeleteHandler}
+        />
+        <SnackBar
+          alertState={open}
+          close={handleAlertClose}
+          message={alertMessage}
+          type={alertType}
         />
       </div>
     </div>

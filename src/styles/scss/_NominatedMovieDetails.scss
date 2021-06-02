@@ -7,25 +7,25 @@
   .details {
     /* height: 108px; */
     display: flex;
+    margin-left: 10px;
+    color: white;
     flex-direction: column;
     justify-content: space-between;
-    color: white;
-    margin-left: 10px;
     button {
       width: 90px;
       padding: 4px;
-      border-style: none;
-      border-radius: 6px;
+      background-color: rgb(228, 29, 29);
       color: white;
       font-size: 1rem;
-      background-color: rgb(228, 29, 29);
+      border-style: none;
+      border-radius: 6px;
       &:hover {
         background-color: rgb(216, 4, 4);
       }
     }
     .title {
-      overflow: hidden;
       display: -webkit-box;
+      overflow: hidden;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
     }

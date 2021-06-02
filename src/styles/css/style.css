@@ -1,6 +1,6 @@
 .wrapper {
-  margin: auto;
   max-width: 1400px;
+  margin: auto;
 }
 
 .body {
@@ -11,16 +11,16 @@
 }
 
 .container {
-  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
+  padding: 20px;
+  color: white;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
-  padding: 40px 20px;
 }
 
 .container p {
@@ -50,6 +50,15 @@
   display: flex;
 }
 
+.container .search-intro {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.container .search-intro .lottie {
+  margin-bottom: 20px;
+}
+
 p {
   margin: 5px 0;
 }
@@ -73,10 +82,10 @@ p {
 .movie-list {
   display: -ms-grid;
   display: grid;
+  margin: 30px 0;
   -ms-grid-columns: (minmax(32%, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(32%, 1fr));
   grid-gap: 20px 10px;
-  margin: 30px 0;
 }
 
 @media screen and (min-width: 375px) {
@@ -111,8 +120,9 @@ p {
 
 @media screen and (min-width: 1024px) {
   .movie-list {
-    -ms-grid-columns: (minmax(17%, 1fr))[auto-fill];
-        grid-template-columns: repeat(auto-fill, minmax(17%, 1fr));
+    -ms-grid-columns: (minmax(15%, 1fr))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+    grid-gap: 29px 7%;
   }
 }
 
@@ -120,6 +130,7 @@ p {
   .movie-list {
     -ms-grid-columns: (minmax(10%, 1fr))[auto-fill];
         grid-template-columns: repeat(auto-fill, minmax(10%, 1fr));
+    grid-gap: 29px 9%;
   }
 }
 
@@ -157,9 +168,9 @@ p {
   height: -moz-fit-content;
   height: fit-content;
   padding: 4px;
-  font-family: "Nunito Sans", sans-serif;
   background-color: transparent;
   color: #0f920b;
+  font-family: "Nunito Sans", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   text-align: center;
@@ -196,7 +207,7 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 125px;
+  height: 115px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -209,9 +220,9 @@ p {
 .movie-details .details .title {
   display: -webkit-box;
   overflow: hidden;
+  height: 53px;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  height: 53px;
 }
 
 /* surface pro screen size */
@@ -266,7 +277,7 @@ p {
           justify-content: center;
 }
 
-.search-bar input {
+.search-bar form input {
   width: 100%;
   height: 32px;
   padding: 0 6px;
@@ -275,21 +286,18 @@ p {
   border-style: none;
 }
 
-.search-bar input:focus-visible {
-  outline: none;
+.search-bar form input:focus:not(:focus-visible) {
+  background: lime;
+  /* undo gold */
 }
 
-.search-bar:focus-visible {
+.search-bar form:focus-visible {
   border: inset;
   outline: inset;
 }
 
-.search-bar label {
+.search-bar form label {
   font-size: large;
-}
-
-.search-bar i {
-  color: #333333;
 }
 
 @media screen and (min-width: 576px) {
@@ -303,30 +311,30 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  color: white;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: white;
 }
 
 .page-change-buttons button {
-  width: 75px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  width: 75px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  margin: 0 10px;
+  font-size: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border-radius: 6px;
   border-style: none;
-  font-size: 1rem;
-  margin: 0 10px;
 }
 
 .page-change-buttons svg {
@@ -334,17 +342,17 @@ p {
 }
 
 .nominations-list {
-  display: none;
-  width: 27%;
-  padding: 45px 10px 0 0;
   position: fixed;
   right: 10px;
+  display: none;
+  width: 25%;
+  padding: 10px 10px 0 0;
   color: white;
 }
 
 .nominations-list img {
-  height: 78px;
   max-width: 53px;
+  height: 78px;
   margin-top: auto;
   border-radius: 7px;
 }
@@ -356,9 +364,9 @@ p {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  font-family: "Nunito Sans", sans-serif;
   background-color: transparent;
   color: #0f920b;
+  font-family: "Nunito Sans", sans-serif;
   font-size: 1rem;
   text-align: center;
   border-style: solid;
@@ -389,8 +397,8 @@ p {
 }
 
 .nominations-list .empty-box {
-  height: 150px;
   max-width: 100%;
+  height: 150px;
   color: antiquewhite;
 }
 
@@ -398,11 +406,11 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0 10px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 0 10px;
 }
 
 .nominations-list .nomination {
@@ -440,6 +448,8 @@ p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-left: 10px;
+  color: white;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -447,18 +457,16 @@ p {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  color: white;
-  margin-left: 10px;
 }
 
 .nomination .details button {
   width: 90px;
   padding: 4px;
-  border-style: none;
-  border-radius: 6px;
+  background-color: #e41d1d;
   color: white;
   font-size: 1rem;
-  background-color: #e41d1d;
+  border-style: none;
+  border-radius: 6px;
 }
 
 .nomination .details button:hover {
@@ -466,23 +474,23 @@ p {
 }
 
 .nomination .details .title {
-  overflow: hidden;
   display: -webkit-box;
+  overflow: hidden;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 
 /*Mobile Nominations Drawer styling ***************************************** */
 .navbar {
-  background-color: white;
-  z-index: 1;
   position: fixed;
-  width: 100%;
-  height: 60px;
-  background-color: transparent;
+  z-index: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  background-color: transparent;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
@@ -490,8 +498,8 @@ p {
 }
 
 .navbar .MuiButton-root {
-  color: black;
   padding: 6px 23px;
+  color: black;
 }
 
 .navbar .MuiButtonBase-root {
@@ -501,6 +509,23 @@ p {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+}
+
+.navbar .MuiBadge-anchorOriginTopRightRectangle {
+  -webkit-transform: scale(1) translate(25%, -25%);
+          transform: scale(1) translate(25%, -25%);
+}
+
+.navbar .MuiBadge-badge {
+  font-size: 1rem;
+}
+
+.navbar .MuiSvgIcon-root {
+  width: 1.2em;
+  height: 1.2em;
+  padding: 5px;
+  background-color: white;
+  border-radius: 50px;
 }
 
 .MuiDrawer-paper {
@@ -517,10 +542,14 @@ p {
 }
 
 .MuiDrawer-paper img {
-  height: 78px;
   max-width: 53px;
+  height: 78px;
   margin-top: auto;
   border-radius: 7px;
+}
+
+.MuiDrawer-paper .no-nominations p {
+  margin: 15px;
 }
 
 @media screen and (min-width: 576px) {

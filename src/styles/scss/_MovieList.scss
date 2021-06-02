@@ -1,9 +1,9 @@
 /* Movie List styling ******************************************/
 .movie-list {
   display: grid;
+  margin: 30px 0;
   grid-template-columns: repeat(auto-fill, minmax(32%, 1fr));
   grid-gap: 20px 10px;
-  margin: 30px 0;
 }
 
 @media screen and (min-width: 375px) {
@@ -34,13 +34,15 @@
 
 @media screen and (min-width: 1024px) {
   .movie-list {
-    grid-template-columns: repeat(auto-fill, minmax(17%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+    grid-gap: 29px 7%;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .movie-list {
     grid-template-columns: repeat(auto-fill, minmax(10%, 1fr));
+    grid-gap: 29px 9%;
   }
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Tooltip from "@material-ui/core/Tooltip";
-import Add from '@material-ui/icons/Add';
+import Add from "@material-ui/icons/Add";
 
 const MovieDetails = ({
   title,
@@ -10,6 +10,7 @@ const MovieDetails = ({
   isNominated,
   onNomination,
 }) => {
+
   const defaultPoster =
     "https://www.reelviews.net/resources/img/default_poster.jpg";
   const moviePosterSrc = poster === "N/A" ? defaultPoster : poster;
@@ -21,7 +22,7 @@ const MovieDetails = ({
       Poster: moviePosterSrc,
       isNominated: true,
     };
-
+    // setOpen(true);
     onNomination(nominatedMovie);
   };
   return (

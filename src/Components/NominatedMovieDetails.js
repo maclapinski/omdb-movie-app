@@ -23,7 +23,7 @@ const NominatedMovieDetails = ({
           <p>{year}</p>
         </div>
         <button type="button" value={imdbID} onClick={nominationDeleteHandler}>
-          Delete
+          Remove
         </button>
       </div>
     </div>

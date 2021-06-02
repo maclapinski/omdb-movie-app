@@ -1,18 +1,18 @@
 /* Page Change Buttons  styling ******************************************/
 .page-change-buttons {
   display: flex;
+  color: white;
   justify-content: center;
   align-items: center;
-  color: white;
   button {
-    width: 75px;
     display: flex;
-    justify-content: center;
+    width: 75px;
     height: fit-content;
+    margin: 0 10px;
+    font-size: 1rem;
+    justify-content: center;
     border-radius: 6px;
     border-style: none;
-    font-size: 1rem;
-    margin: 0 10px;
   }
   svg {
     font-size: xx-large;
