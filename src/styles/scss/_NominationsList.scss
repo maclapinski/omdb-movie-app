@@ -57,6 +57,13 @@
     display: block;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .nominations-list {
+    display: block;
+  }
+}
+
 @media screen and (min-width: 1400px) {
   .nominations-list {
     position: initial;
