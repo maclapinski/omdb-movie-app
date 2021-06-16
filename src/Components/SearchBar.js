@@ -3,21 +3,22 @@ import SearchIcon from "@material-ui/icons/Search";
 
 const SearchBar = (props) => {
   const [term, setTerm] = useState("");
-  const [isTermValid, setIsTermValid] = useState(false);
+  const [termValid, setTermValid] = useState(false);
 
-  const isInputValid = (input) => {
-    input.length > 0 ? setIsTermValid(true) : setIsTermValid(false);
+  const inputCheck = (input) => {
+    input.length > 0 ? setTermValid(true) : setTermValid(false);
   };
-  const onInputChange = (event) => {
-    isInputValid(event.target.value);
+
+  const inputChangeHandler = (event) => {
+    inputCheck(event.target.value);
     setTerm(event.target.value);
-    props.onChange(event.target.value);
   };
 
-  const onSearchSubmit = (event) => {
+  const searchSubmitHandler = (event) => {
     event.preventDefault();
-    if (isTermValid) {
-      props.onSubmit();
+    
+    if (termValid) {
+      props.onSubmit(1, term.trim());
       console.log("Term Submitted");
     } else {
       console.log("Term Invalid");
@@ -26,14 +27,15 @@ const SearchBar = (props) => {
 
   return (
     <div className="search-bar">
-      <form action="." onSubmit={onSearchSubmit}>
+      <form action="." onSubmit={searchSubmitHandler}>
         <div className="search-input">
           <SearchIcon />
           <input
+            htmlFor="search term"
             type="search"
             value={term}
             placeholder="Search..."
-            onChange={onInputChange}
+            onChange={inputChangeHandler}
           ></input>
         </div>
 

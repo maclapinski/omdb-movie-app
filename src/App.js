@@ -7,9 +7,9 @@ import MovieList from "./Components/MovieList";
 import PageButtons from "./Components/PageButtons";
 import NominationsList from "./Components/NominationsList";
 import movieClapper from "../src/media/movie-clapper-open.svg";
-import "./styles/css/style.css";
 import cinema from "./media/45737-cinema-infos-and-ressources.json";
 import SnackBar from "./Components/Snackbar";
+import "./styles/css/style.css";
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
@@ -22,18 +22,16 @@ const App = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
 
-  const onTermChangeHandler = (term) => {
-    setSearchTerm(term);
-  };
-
-  const onTermSubmitHandler = async (number) => {
+  const termSubmitHandler = async (number, term) => {
     const apiKey = "d4e0320";
+    setSearchTerm(term);
+    setPageNumber(number);
     const response = await omdb.get("", {
-      params: { s: searchTerm.trim(), page: setPage(number), apikey: apiKey },
+      params: { s: term.trim(), page: number, apikey: apiKey },
     });
 
     if (response.data.Response === "True") {
-      if (!number) {
+      if (number === 1) {
         setPageCount(response.data.totalResults);
       }
       const searchData = duplicateCheck(response.data.Search);
@@ -46,16 +44,16 @@ const App = () => {
         nominationsCheck(searchData);
       }
     } else {
-      handleAlertOpen("No movies found. Check your search term.", "error");
+      handleAlertOpen("No movies found. Incorrect or too short search term.", "error");
       setMovieList([]);
     }
   };
-  const onPageNumberChangeHandler = (number) => {
+  const pageNumberChangeHandler = (number) => {
     setPageNumber(number);
-    onTermSubmitHandler(number);
+    termSubmitHandler(number, searchTerm);
   };
 
-  const onNominationHandler = (nominatedMovie) => {
+  const nominationHandler = (nominatedMovie) => {
     if (nominationsNumber === 5) {
       handleAlertOpen("You can't nominate more than 5 movies!", "error");
     } else {
@@ -79,7 +77,7 @@ const App = () => {
 
   //find move deleted from nominations list, update nominations list,
   //set nominate button active for the deleted movie
-  const onNominationDeleteHandler = (imdbID) => {
+  const nominationDeleteHandler = (imdbID) => {
     const nominations = [...nominationsList];
     setNominationsNumber(nominationsNumber - 1);
     const checkDeleted = (nomination) => {
@@ -103,21 +101,6 @@ const App = () => {
     });
 
     setMovieList([...searchResults]);
-  };
-
-  //set current page
-  const setPage = (number) => {
-    let page = 1;
-    //if next or previous page button clicked,
-    //new page number is provided and first part of the statement is activated.
-    //if new search is submitted, page number is set to 1
-    if (number) {
-      page = number;
-      setPageNumber(number);
-    } else {
-      setPageNumber(1);
-    }
-    return page;
   };
 
   //set number of pages for current search
@@ -177,7 +160,7 @@ const App = () => {
       <div className="body">
         <MobileNominationsDrawer
           nominations={nominationsList}
-          onDelete={onNominationDeleteHandler}
+          onDelete={nominationDeleteHandler}
           nominationsNumber={nominationsNumber}
         />
         <div className="container">
@@ -187,8 +170,7 @@ const App = () => {
           </div>
 
           <SearchBar
-            onSubmit={onTermSubmitHandler}
-            onChange={onTermChangeHandler}
+            onSubmit={termSubmitHandler}
           />
           {movieList.length === 0 ? (
             <div className="search-intro">
@@ -206,20 +188,20 @@ const App = () => {
           ) : (
             <div>
               <MovieList
-                onNomination={onNominationHandler}
+                onNomination={nominationHandler}
                 searchResults={movieList}
               />{" "}
               <PageButtons
                 pageNumber={pageNumber}
                 lastPageNumber={lastPageNumber}
-                onChange={onPageNumberChangeHandler}
+                onChange={pageNumberChangeHandler}
               />
             </div>
           )}
         </div>
         <NominationsList
           nominations={nominationsList}
-          onDelete={onNominationDeleteHandler}
+          onDelete={nominationDeleteHandler}
         />
         <SnackBar
           alertState={openAlert}

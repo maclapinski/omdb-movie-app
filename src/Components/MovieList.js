@@ -4,19 +4,17 @@ import MovieDetails from "./MovieDetails";
 const MovieList = ({ searchResults, onNomination }) => {
   return (
     <div className="movie-list">
-      {searchResults.map((movie) => {
-        return (
-          <MovieDetails
-            key={movie.imdbID}
-            title={movie.Title}
-            imdbID={movie.imdbID}
-            poster={movie.Poster}
-            year={movie.Year}
-            isNominated={movie.isNominated}
-            onNomination={onNomination}
-          />
-        );
-      })}
+      {searchResults.map((movie) => (
+        <MovieDetails
+          key={movie.imdbID}
+          title={movie.Title}
+          imdbID={movie.imdbID}
+          poster={movie.Poster}
+          year={movie.Year}
+          isNominated={movie.isNominated}
+          onNomination={onNomination}
+        />
+      ))}
     </div>
   );
 };

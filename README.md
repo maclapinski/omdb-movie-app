@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Movie Nominations
+
+React project inspired by Shopify's Front End Web Developer Intern Challenge
+
+## Motivation
+I recently decided to change my career and follow my passion which is coding. I'm excited to keep learning and growing, and by doing this project I was able to use my knowledge in practice.
+
+## About this project
+This is my second app built in React, and my first one using Hooks with function components (rather than class components).
+Web Development is still quite new to me, but I love trying new things and learning from them. I took this challenge as a great opportunity to learn something new. 
+
+Uses: Sass, React, OMDB REST api
+
+## Challenges:
+The OMDB api returns "Error response: Too many results" (and undefined result) when the user has typed only a few letters. 
+The documentation for the api provides no parameter to limit the results. 
+I tried using the page parameter, but that did not solve the error. I haven't found a solution/workaround, other than displaying an alert message to the user. The second challenge was the lack of posters for some movies. I had to create a default image that is getting rendered when no other image is available. The third issue was duplicated items in search results. I had to implement a results check that deletes duplicates. 
+ 
+## How does it work?
+The user enters characters into the search input. On submit, the input is saved and used to make an API call to OMDB. 
+  
+Results are rendered on the page.  Based on a comparison between the search result array, and the nominations array, the "nominate" buttons are rendered in active or disabled state.
+  
+The user can click a "nominate" button to add the movie to their nominations. 
+  
+When the "nominate" button is clicked, that movie is pushed into the nominations array and isNominated property of the movie is changed to true. Based on the isNominated property the "nominate" button is rendered as active or disabled.
+
+The user can remove the nominated movie by clicking the "remove" button. 
+  
+When the "remove" button is clicked, that movie is removed from the nominations array and isNominated property of the movie is changed to false. The "nominate" button on the movie card becomes active.
+  
+Once the user has chosen five nominations, the confirmation message appears. 
+  
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
