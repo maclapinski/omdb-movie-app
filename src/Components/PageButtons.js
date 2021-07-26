@@ -13,7 +13,7 @@ const PageButtons = ({ pageNumber, onChange, lastPageNumber }) => {
       <button
         type="button"
         value={-1}
-        disabled={pageNumber > 1 ? false : true}
+        disabled={pageNumber === 1}
         onClick={onPageNumberChange}
         className="button-prev"
       >
@@ -25,7 +25,7 @@ const PageButtons = ({ pageNumber, onChange, lastPageNumber }) => {
       <button
         type="button"
         value={1}
-        disabled={pageNumber !== lastPageNumber ? false : true}
+        disabled={pageNumber === lastPageNumber}
         onClick={onPageNumberChange}
         className="button-next"
       >

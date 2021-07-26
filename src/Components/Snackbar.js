@@ -20,7 +20,8 @@ export default function SnackBar({alertState, close, message, type}) {
 
   return (
     <div className={classes.root}>
-      <Snackbar open={alertState} autoHideDuration={6000} onClose={close}>
+      <Snackbar open={alertState} autoHideDuration={6000} onClose={close} onClick={event => {console.log(event)}}>
+      {/* <Snackbar open={alertState} > */}
         <Alert onClose={close} severity={type}>
           {message}
         </Alert>

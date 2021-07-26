@@ -5,29 +5,29 @@
     margin: 0 0 5px 0;
   }
   .details {
+    color: white;
     /* height: 108px; */
     display: flex;
-    margin-left: 10px;
-    color: white;
     flex-direction: column;
     justify-content: space-between;
+    margin-left: 10px;
     button {
-      width: 90px;
-      padding: 4px;
       background-color: rgb(228, 29, 29);
+      border-radius: 6px;
+      border-style: none;
       color: white;
       font-size: 1rem;
-      border-style: none;
-      border-radius: 6px;
+      padding: 4px;
+      width: 90px;
       &:hover {
         background-color: rgb(216, 4, 4);
       }
     }
     .title {
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
     }
   }
 }

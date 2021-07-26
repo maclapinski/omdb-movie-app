@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import MobileNominationsDrawer from "./Components/MobileNominationsDrawer";
 import SearchBar from "./Components/SearchBar";
 import omdb from "./api/omdb";
@@ -7,22 +8,28 @@ import MovieList from "./Components/MovieList";
 import PageButtons from "./Components/PageButtons";
 import NominationsList from "./Components/NominationsList";
 import movieClapper from "../src/media/movie-clapper-open.svg";
-import cinema from "./media/45737-cinema-infos-and-ressources.json";
+import cinema from "./media/45737-cinema-infos-and-resources.json";
 import SnackBar from "./Components/Snackbar";
 import "./styles/css/style.css";
 
 const App = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [movieList, setMovieList] = useState([]);
   const [nominationsList, setNominationsList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [nominationsNumber, setNominationsNumber] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [pageNumber, setPageNumber] = useState(1);
   const [lastPageNumber, setLastPageNumber] = useState(1);
-  const [nominationsNumber, setNominationsNumber] = useState(0);
+
   const [openAlert, setOpenAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
 
+  console.log("App running");
+
   const termSubmitHandler = async (number, term) => {
+    setIsLoading(true)
     const apiKey = "d4e0320";
     setSearchTerm(term);
     setPageNumber(number);
@@ -31,25 +38,25 @@ const App = () => {
     });
 
     if (response.data.Response === "True") {
+      
       if (number === 1) {
         setPageCount(response.data.totalResults);
       }
       const searchData = duplicateCheck(response.data.Search);
-      if (nominationsList.length === 0) {
-        searchData.forEach((movie) => {
-          movie.isNominated = false;
-        });
-        setMovieList(searchData);
-      } else {
-        nominationsCheck(searchData);
-      }
+
+      setMovieList(nominationsCheck(searchData));
+      setIsLoading(false)
     } else {
-      handleAlertOpen("No movies found. Incorrect or too short search term.", "error");
+      handleAlertOpen(
+        "No movies found. Incorrect or too short search term.",
+        "error"
+      );
       setMovieList([]);
     }
+    setPageNumber(number);
   };
   const pageNumberChangeHandler = (number) => {
-    setPageNumber(number);
+    
     termSubmitHandler(number, searchTerm);
   };
 
@@ -57,7 +64,7 @@ const App = () => {
     if (nominationsNumber === 5) {
       handleAlertOpen("You can't nominate more than 5 movies!", "error");
     } else {
-      setIsNominatedProperty(nominatedMovie.imdbID, false);
+      setIsNominatedProperty(nominatedMovie.imdbID, true);
       setNominationsNumber(nominationsNumber + 1);
       if (nominationsNumber === 4) {
         console.log(nominationsNumber);
@@ -79,24 +86,22 @@ const App = () => {
   //set nominate button active for the deleted movie
   const nominationDeleteHandler = (imdbID) => {
     const nominations = [...nominationsList];
-    setNominationsNumber(nominationsNumber - 1);
-    const checkDeleted = (nomination) => {
-      console.log(nomination);
-      return nomination.imdbID !== imdbID;
-    };
-    const updatedNominations = nominations.filter(checkDeleted);
+    const updatedNominations = nominations.filter(
+      (nomination) => nomination.imdbID !== imdbID
+    );
+
     setNominationsList(updatedNominations);
     handleAlertOpen("Nomination successfully removed!", "success");
-    setIsNominatedProperty(imdbID, true);
+    setIsNominatedProperty(imdbID, false);
+    setNominationsNumber(nominationsNumber - 1);
   };
 
-  const setIsNominatedProperty = (imdbID, isDeleteAction) => {
+  const setIsNominatedProperty = (imdbID, isNomination) => {
     const searchResults = [...movieList];
+
     searchResults.forEach((movie) => {
-      if (imdbID === movie.imdbID && isDeleteAction) {
-        movie.isNominated = false;
-      } else if (imdbID === movie.imdbID && !isDeleteAction) {
-        movie.isNominated = true;
+      if (imdbID === movie.imdbID) {
+        movie.isNominated = isNomination;
       }
     });
 
@@ -114,11 +119,12 @@ const App = () => {
     }
   };
 
-  // sort and check if returned array of movies has duplicated objects
+  // sort and remove duplicated objects
   const duplicateCheck = (results) => {
     const sortedResults = [...results].sort((a, b) =>
       a.imdbID === b.imdbID ? 1 : b.imdbID > a.imdbID ? -1 : 0
     );
+
     for (let i = 1, prevMovie = 0; i < sortedResults.length; i++) {
       if (sortedResults[i].imdbID === sortedResults[prevMovie].imdbID) {
         sortedResults.splice(sortedResults.indexOf(sortedResults[i]), 1);
@@ -131,15 +137,19 @@ const App = () => {
   };
 
   const nominationsCheck = (results) => {
-    const newResults = [...results];
-    newResults.forEach((newResult) => {
+    const checkedResults = [...results];
+
+    checkedResults.forEach((result) => {
       nominationsList.forEach((nomination) => {
-        if (newResult.imdbID === nomination.imdbID) {
-          newResult.isNominated = true;
+        if (result.imdbID === nomination.imdbID) {
+          result.isNominated = true;
+        } else {
+          result.isNominated = false;
         }
       });
     });
-    setMovieList(newResults);
+
+    return checkedResults;
   };
 
   const handleAlertOpen = (message, type) => {
@@ -148,10 +158,7 @@ const App = () => {
     setOpenAlert(true);
   };
 
-  const handleAlertClose = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleAlertClose = () => {
     setOpenAlert(false);
   };
 
@@ -169,9 +176,7 @@ const App = () => {
             <h1>Movie Nominations</h1>
           </div>
 
-          <SearchBar
-            onSubmit={termSubmitHandler}
-          />
+          <SearchBar onSubmit={termSubmitHandler} />
           {movieList.length === 0 ? (
             <div className="search-intro">
               <LottieAnimation lotti={cinema} height={200} width={200} />
@@ -187,10 +192,11 @@ const App = () => {
             </div>
           ) : (
             <div>
-              <MovieList
+              {isLoading ? <p>Loading...</p>: <MovieList
                 onNomination={nominationHandler}
                 searchResults={movieList}
-              />{" "}
+              />}
+              
               <PageButtons
                 pageNumber={pageNumber}
                 lastPageNumber={lastPageNumber}
@@ -203,12 +209,15 @@ const App = () => {
           nominations={nominationsList}
           onDelete={nominationDeleteHandler}
         />
-        <SnackBar
-          alertState={openAlert}
-          close={handleAlertClose}
-          message={alertMessage}
-          type={alertType}
-        />
+        {createPortal(
+          <SnackBar
+            alertState={openAlert}
+            close={handleAlertClose}
+            message={alertMessage}
+            type={alertType}
+          />,
+          document.getElementById("alert-root")
+        )}
       </div>
     </div>
   );

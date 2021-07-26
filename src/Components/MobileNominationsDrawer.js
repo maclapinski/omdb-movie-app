@@ -25,6 +25,7 @@ export default function MobileNominationsDrawer({
   nominationsNumber,
   onDelete,
 }) {
+  console.log("running ")
   const classes = useStyles();
   const [state, setState] = useState({ right: false });
 

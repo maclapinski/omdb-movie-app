@@ -1,6 +1,6 @@
 .wrapper {
-  max-width: 1400px;
   margin: auto;
+  max-width: 1250px;
 }
 .body {
   display: flex;
@@ -8,17 +8,17 @@
 }
 
 .container {
-  display: flex;
-  width: 100%;
-  padding: 20px;
   color: white;
+  display: flex;
   flex-direction: column;
+  padding: 20px;
+  width: 100%;
   p {
     font-size: medium;
   }
   .title {
-    display: flex;
     align-items: center;
+    display: flex;
     h1 {
       margin: 30px 17px;
     }
@@ -29,10 +29,10 @@
       display: flex;
     }
   }
-  .search-intro{
+  .search-intro {
     margin-top: 30px;
     text-align: center;
-    .lottie{
+    .lottie {
       margin-bottom: 20px;
     }
   }
@@ -42,11 +42,10 @@ p {
   margin: 5px 0;
 }
 
-@media screen and (min-width: 768px) and (min-height: 768px){
+@media only screen and (min-width: 768px) and (min-height: 768px), (min-width: 1024px) {
   .container {
-    width: 73%;
     padding: 30px 40px;
-
+    width: 73%;
     .title {
       align-items: baseline;
       img {

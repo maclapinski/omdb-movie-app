@@ -1,33 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 
 const SearchBar = (props) => {
   const [term, setTerm] = useState("");
   const [termValid, setTermValid] = useState(false);
 
-  const inputCheck = (input) => {
-    input.length > 0 ? setTermValid(true) : setTermValid(false);
-  };
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      setTermValid(term.trim().length > 0);
+    }, 600);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [term]);
 
   const inputChangeHandler = (event) => {
-    inputCheck(event.target.value);
+    console.log(event.target.value)
     setTerm(event.target.value);
   };
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();
-    
-    if (termValid) {
-      props.onSubmit(1, term.trim());
-      console.log("Term Submitted");
-    } else {
-      console.log("Term Invalid");
-    }
+
+    termValid && props.onSubmit(1, term.trim());
   };
 
   return (
     <div className="search-bar">
-      <form action="." onSubmit={searchSubmitHandler}>
+      <form onSubmit={searchSubmitHandler}>
         <div className="search-input">
           <SearchIcon />
           <input

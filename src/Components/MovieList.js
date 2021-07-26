@@ -2,6 +2,7 @@ import React from "react";
 import MovieDetails from "./MovieDetails";
 
 const MovieList = ({ searchResults, onNomination }) => {
+  console.log("movie list running")
   return (
     <div className="movie-list">
       {searchResults.map((movie) => (
