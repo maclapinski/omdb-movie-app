@@ -33,6 +33,7 @@ const SearchBar = (props) => {
           <SearchIcon />
           <input
             htmlFor="search term"
+            name="search"
             type="search"
             value={term}
             placeholder="Search..."
