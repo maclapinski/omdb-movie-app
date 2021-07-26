@@ -28,7 +28,7 @@ const SearchBar = (props) => {
 
   return (
     <div className="search-bar">
-      <form onSubmit={searchSubmitHandler}>
+      <form action="." onSubmit={searchSubmitHandler}>
         <div className="search-input">
           <SearchIcon />
           <input
