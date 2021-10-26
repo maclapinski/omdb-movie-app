@@ -1,6 +1,7 @@
 # Movie Nominations
 
 React project inspired by Shopify's Front End Web Developer Intern Challenge
+
 [Project preview](https://nominations-app.netlify.app/)
 
 ## Motivation
