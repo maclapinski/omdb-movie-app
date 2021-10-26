@@ -1,6 +1,7 @@
 # Movie Nominations
 
 React project inspired by Shopify's Front End Web Developer Intern Challenge
+[Project preview](https://nominations-app.netlify.app/)
 
 ## Motivation
 I recently decided to change my career and follow my passion which is coding. I'm excited to keep learning and growing, and by doing this project I was able to use my knowledge in practice.
